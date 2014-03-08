@@ -447,6 +447,9 @@
     margin-top: 0;
     padding-left: 25px;
   }
+.leaflet-popup-content ul.noindent{
+    padding-left: 0px;
+  }
   .leaflet-popup-content .actions {
     -webkit-touch-callout: none;
       -webkit-user-select: none;
