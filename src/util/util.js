@@ -232,6 +232,44 @@ module.exports = {
           }
         }
 
+        if (options.media && data.image_url) {
+          console.log('options.media', options.media, data);
+          var imageType = {
+            focus: function(guids) {
+              var attrs, guidArray, i, imgs = [],
+              regex = new RegExp('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(}){0,1}', 'g');
+              guidArray = guids.match(regex);
+              for (i = 0; i < guidArray.length; i++) {
+                attrs = {
+                  src: 'http://focus.nps.gov/GetAsset/' + guidArray[i] + '/proxy/lores',
+                  href: 'http://focus.nps.gov/AssetDetail?assetID=' + guidArray[i]
+                };
+                imgs.push(attrs);
+              }
+              return imgs;
+            }
+          },
+            imageDiv = L.DomUtil.create('div', '', div),
+            mediaIndex;
+            imageDiv.style.width = '250px';
+            imageDiv.style.height = (250 * .75) + 'px';
+
+
+          for (mediaIndex = 0; mediaIndex < options.media.length; mediaIndex++) {
+            var imageAttrs, newAnchor, newImage;
+            if (imageType[options.media[mediaIndex].type]) {
+              imageAttrs = imageType [options.media[mediaIndex].type](data.image_url);
+              //TODO: Add multiple image support
+              imageAttrs = imageAttrs;
+              newAnchor = L.DomUtil.create('a', '', imageDiv);
+              newAnchor.href = imageAttrs[0].href;
+              newImage = L.DomUtil.create('img', '', newAnchor);
+              newImage.src = imageAttrs[0].src;
+              newImage.style.width = '100%';
+            }
+          }
+        }
+
         if (options.actions && L.Util.isArray(options.actions)) {
           var actions = L.DomUtil.create('div', 'actions', div),
             ul = L.DomUtil.create('ul', null, actions),
