@@ -252,6 +252,8 @@ module.exports = {
             mediaIndex;
             imageDiv.style.width = '250px';
             imageDiv.style.height = (250 * .75) + 'px';
+            imageDiv.style.marginLeft = 'auto';
+            imageDiv.style.marginRight = 'auto';
 
 
           for (mediaIndex = 0; mediaIndex < options.media.length; mediaIndex++) {
