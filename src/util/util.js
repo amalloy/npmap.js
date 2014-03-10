@@ -233,11 +233,10 @@ module.exports = {
         }
 
         if (options.media && data.image_url) {
-          console.log('options.media', options.media, data);
           var imageType = {
             focus: function(guids) {
               var attrs, guidArray, i, imgs = [],
-              regex = new RegExp('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(}){0,1}', 'g');
+              regex = new RegExp('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(}){0,1}', 'g'); //{ Fix Vim brackets
               guidArray = guids.match(regex);
               for (i = 0; i < guidArray.length; i++) {
                 attrs = {
